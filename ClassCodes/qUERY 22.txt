@@ -1,0 +1,28 @@
+
+  1  SELECT ENAME, LOC
+  2  FROM EMP E, DEPT D
+  3  WHERE E.DEPTNO = D.DEPTNO AND
+  4   SAL >(SELECT SAL
+  5         FROM EMP
+  6         WHERE ENAME='TURNER') AND
+  7  SAL<(SELECT SAL
+  8       FROM EMP
+  9       WHERE ENAME='FORD') AND
+ 10  DNAME IN(SELECT DNAME
+ 11      FROM DEPT
+ 12      WHERE DEPTNO IN (SELECT DEPTNO
+ 13                       FROM EMP
+ 14                       WHERE ENAME ='BLAKE')) AND
+ 15  HIREDATE >(SELECT HIREDATE
+ 16             FROM EMP
+ 17             WHERE ENAME ='SMITH') AND
+ 18  HIREDATE<(SELECT HIREDATE
+ 19       FROM EMP
+ 20       WHERE ENAME='KING') AND
+ 21* COMM IS NULL
+SQL> /
+
+ENAME      LOC
+---------- -------------
+BLAKE      CHICAGO
+
